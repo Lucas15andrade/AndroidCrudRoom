@@ -1,10 +1,13 @@
-package com.andradecoder.androidcrud;
+package com.andradecoder.androidcrud.activitys;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.andradecoder.androidcrud.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), CadastroActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -25,8 +29,14 @@ public class MainActivity extends AppCompatActivity {
         botaoListar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getApplicationContext(), ListarActivity.class);
+                startActivityForResult(intent,2);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

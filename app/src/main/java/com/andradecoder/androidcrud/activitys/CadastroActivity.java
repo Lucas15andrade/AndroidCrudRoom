@@ -1,10 +1,12 @@
-package com.andradecoder.androidcrud;
+package com.andradecoder.androidcrud.activitys;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.andradecoder.androidcrud.R;
 
 public class CadastroActivity extends AppCompatActivity {
 
