@@ -2,6 +2,7 @@ package com.andradecoder.androidcrud.activitys;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,5 +39,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if(data == null){
+            return;
+        }
+
+        Bundle bd = data.getExtras();
+        Boolean salvar = bd.getBoolean("salvar");
+        if(resultCode == RESULT_OK && requestCode == 1){
+            if(salvar){
+                View v = findViewById(R.id.layout);
+                Snackbar snack = Snackbar.make((View) v.getParent(),"Livro cadastrado", Snackbar.LENGTH_SHORT);
+                snack.show();
+            }
+        }
     }
 }

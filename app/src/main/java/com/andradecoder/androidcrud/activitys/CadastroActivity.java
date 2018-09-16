@@ -1,5 +1,6 @@
 package com.andradecoder.androidcrud.activitys;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,12 @@ public class CadastroActivity extends AppCompatActivity {
                 db = AppDatabase.getDatabase(getApplicationContext());
                 livrodao = db.livrodao();
                 livrodao.insert(livro);
+
+                Intent intent = new Intent();
+                Bundle bd = new Bundle();
+                bd.putBoolean("salvar",true);
+                intent.putExtras(bd);
+                setResult(RESULT_OK,intent);
                 finish();
             }
         });
@@ -43,6 +50,11 @@ public class CadastroActivity extends AppCompatActivity {
         botaoCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent();
+                Bundle bd = new Bundle();
+                bd.putBoolean("salvar",false);
+                intent.putExtras(bd);
+                setResult(RESULT_CANCELED, intent);
                 finish();
             }
         });
