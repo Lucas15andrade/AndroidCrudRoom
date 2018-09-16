@@ -6,16 +6,26 @@ public class Livro {
     private String autor;
     private String ano;
     private String nota;
+    private int id;
 
     public Livro() {
 
     }
 
-    public Livro(String titulo, String autor, String ano, String nota) {
+    public Livro(String titulo, String autor, String ano, String nota){
         this.titulo = titulo;
         this.autor = autor;
         this.ano = ano;
         this.nota = nota;
+        //this.id = 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitulo() {
