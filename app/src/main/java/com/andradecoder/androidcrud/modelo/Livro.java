@@ -1,11 +1,18 @@
 package com.andradecoder.androidcrud.modelo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity
 public class Livro {
 
     private String titulo;
     private String autor;
     private String ano;
     private String nota;
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
     private int id;
 
     public Livro() {
