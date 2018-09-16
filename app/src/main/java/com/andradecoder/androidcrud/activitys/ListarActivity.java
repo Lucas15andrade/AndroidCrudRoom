@@ -10,7 +10,8 @@ import android.widget.Toast;
 
 import com.andradecoder.androidcrud.R;
 import com.andradecoder.androidcrud.modelo.Livro;
-import com.andradecoder.androidcrud.util.BancoHelper;
+import com.andradecoder.androidcrud.util.AppDatabase;
+import com.andradecoder.androidcrud.util.LivroDAO;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,10 @@ public class ListarActivity extends AppCompatActivity {
     TextView textAutor;
     TextView textAno;
     TextView textNota;
-    ArrayList<Livro> livros;
+    //ArrayList<Livro> livros;
+    Livro[] livros;
+    AppDatabase db;
+    LivroDAO livrodao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +40,20 @@ public class ListarActivity extends AppCompatActivity {
         textAno = findViewById(R.id.textAno);
         textNota = findViewById(R.id.textNota);
 
-        BancoHelper db = new BancoHelper(getApplicationContext());
-        livros = new ArrayList<>();
-        livros = (ArrayList<Livro>) db.listarTodos();
+        db = AppDatabase.getDatabase(this);
+        livrodao = db.livrodao();
+        //livros = new ArrayList<>();
+        livros =  livrodao.listarTodos();
 
-        if(livros.size() > 0){
-            //Preenchendo com o primeiro Livro
-            textTitulo.setText(livros.get(0).getTitulo());
-            textAutor.setText(livros.get(0).getAutor());
-            textAno.setText(livros.get(0).getAno());
-            textNota.setText(livros.get(0).getNota());
+        if(cont == 1){
+            if(livros.length > 0){
+                //Preenchendo com o primeiro Livro
+                textTitulo.setText(livros[0].getTitulo());
+                textAutor.setText(livros[0].getAutor());
+                textAno.setText(livros[0].getAno());
+                textNota.setText(livros[0].getNota());
 
+            }
         }
 
         Button botaoProximo = findViewById(R.id.botaoProximo);
@@ -54,16 +61,16 @@ public class ListarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(cont >= livros.size()){
+                if(cont >= livros.length){
                     Toast.makeText(ListarActivity.this, "Não há mais livros", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
-                    textTitulo.setText(livros.get(cont).getTitulo());
-                    textAutor.setText(livros.get(cont).getAutor());
-                    textAno.setText(livros.get(cont).getAno());
-                    textNota.setText(livros.get(cont).getNota());
+                    textTitulo.setText(livros[cont].getTitulo());
+                    textAutor.setText(livros[cont].getAutor());
+                    textAno.setText(livros[cont].getAno());
+                    textNota.setText(livros[cont].getNota());
                     cont++;
-                    voltar = cont - 1;
+//                    voltar = cont - 1;
                     Log.i("voltar","avançou");
                 }
 
@@ -76,15 +83,21 @@ public class ListarActivity extends AppCompatActivity {
         botaoAnterior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                voltar--;
-                if(voltar >= 0){
-                    textTitulo.setText(livros.get(voltar).getTitulo());
-                    textAutor.setText(livros.get(voltar).getAutor());
-                    textAno.setText(livros.get(voltar).getAno());
-                    textNota.setText(livros.get(voltar).getNota());
-                    Log.i("voltar","valor de cont:"+voltar);
+                Log.i("avancar","botao retroceder"+cont);
+                --cont;
+                Log.i("avancar","botao retroceder"+cont);
+                if(cont < 0){
+                    Toast.makeText(ListarActivity.this, "Impossível retroceder", Toast.LENGTH_SHORT).show();
                 } else{
-                    Toast.makeText(ListarActivity.this, "Não tem como voltar", Toast.LENGTH_SHORT).show();
+                    Log.i("avancar","botao retroceder"+cont);
+                    Log.i("avancar","titulo"+livros[cont].getTitulo());
+                    if(!(cont - 1 < 0)){
+                        textTitulo.setText(livros[cont-1].getTitulo());
+                        textAutor.setText(livros[cont-1].getAutor());
+                        textAno.setText(livros[cont-1].getAno());
+                        textNota.setText(livros[cont-1].getNota());
+                    }
+
                 }
 
             }

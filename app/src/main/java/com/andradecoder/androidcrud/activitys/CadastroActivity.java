@@ -9,9 +9,13 @@ import android.widget.RatingBar;
 
 import com.andradecoder.androidcrud.R;
 import com.andradecoder.androidcrud.modelo.Livro;
-import com.andradecoder.androidcrud.util.BancoHelper;
+import com.andradecoder.androidcrud.util.AppDatabase;
+import com.andradecoder.androidcrud.util.LivroDAO;
 
 public class CadastroActivity extends AppCompatActivity {
+
+    AppDatabase db;
+    LivroDAO livrodao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +32,9 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Livro livro = new Livro(editTitulo.getText().toString(), editAutor.getText().toString(), editAno.getText().toString(), Float.toString(ratingNota.getRating()));
-                BancoHelper db = new BancoHelper(getApplicationContext());
-
-                db.salvar(livro);
+                db = AppDatabase.getDatabase(getApplicationContext());
+                livrodao = db.livrodao();
+                livrodao.insert(livro);
                 finish();
             }
         });
