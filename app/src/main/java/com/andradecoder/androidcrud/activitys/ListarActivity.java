@@ -65,6 +65,11 @@ public class ListarActivity extends AppCompatActivity {
                     Toast.makeText(ListarActivity.this, "Não há mais livros", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
+
+                    if(cont < 0){
+                        cont = 1;
+                    }
+
                     textTitulo.setText(livros[cont].getTitulo());
                     textAutor.setText(livros[cont].getAutor());
                     textAno.setText(livros[cont].getAno());
@@ -83,9 +88,11 @@ public class ListarActivity extends AppCompatActivity {
         botaoAnterior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("avancar","botao retroceder"+cont);
+//                Log.i("avancar","botao retroceder"+cont);
                 --cont;
-                Log.i("avancar","botao retroceder"+cont);
+//                Log.i("avancar","botao retroceder"+cont);
+
+
                 if(cont < 0){
                     Toast.makeText(ListarActivity.this, "Impossível retroceder", Toast.LENGTH_SHORT).show();
                 } else{
