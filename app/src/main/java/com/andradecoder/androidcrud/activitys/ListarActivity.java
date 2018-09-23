@@ -26,7 +26,7 @@ public class ListarActivity extends AppCompatActivity {
     TextView textAno;
     TextView textNota;
     //ArrayList<Livro> livros;
-    Livro[] livros;
+    ArrayList<Livro> livros;
     AppDatabase db;
     LivroDAO livrodao;
 
@@ -42,16 +42,16 @@ public class ListarActivity extends AppCompatActivity {
 
         db = AppDatabase.getDatabase(this);
         livrodao = db.livrodao();
-        //livros = new ArrayList<>();
-        livros =  livrodao.listarTodos();
+        livros = new ArrayList<>();
+        livros = (ArrayList<Livro>) livrodao.listarTodos();
 
         if(cont == 1){
-            if(livros.length > 0){
+            if(livros.size() > 0){
                 //Preenchendo com o primeiro Livro
-                textTitulo.setText(livros[0].getTitulo());
-                textAutor.setText(livros[0].getAutor());
-                textAno.setText(livros[0].getAno());
-                textNota.setText(livros[0].getNota());
+                textTitulo.setText(livros.get(0).getTitulo());
+                textAutor.setText(livros.get(0).getAutor());
+                textAno.setText(livros.get(0).getAno());
+                textNota.setText(livros.get(0).getNota());
 
             }
         }
@@ -61,7 +61,7 @@ public class ListarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(cont >= livros.length){
+                if(cont >= livros.size()){
                     Toast.makeText(ListarActivity.this, "Não há mais livros", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
@@ -70,10 +70,10 @@ public class ListarActivity extends AppCompatActivity {
                         cont = 1;
                     }
 
-                    textTitulo.setText(livros[cont].getTitulo());
-                    textAutor.setText(livros[cont].getAutor());
-                    textAno.setText(livros[cont].getAno());
-                    textNota.setText(livros[cont].getNota());
+                    textTitulo.setText(livros.get(cont).getTitulo());
+                    textAutor.setText(livros.get(cont).getAutor());
+                    textAno.setText(livros.get(cont).getAno());
+                    textNota.setText(livros.get(cont).getNota());
                     cont++;
 //                    voltar = cont - 1;
                     Log.i("voltar","avançou");
@@ -96,13 +96,13 @@ public class ListarActivity extends AppCompatActivity {
                 if(cont < 0){
                     Toast.makeText(ListarActivity.this, "Impossível retroceder", Toast.LENGTH_SHORT).show();
                 } else{
-                    Log.i("avancar","botao retroceder"+cont);
-                    Log.i("avancar","titulo"+livros[cont].getTitulo());
+//                    Log.i("avancar","botao retroceder"+cont);
+//                    Log.i("avancar","titulo"+livros[cont].getTitulo());
                     if(!(cont - 1 < 0)){
-                        textTitulo.setText(livros[cont-1].getTitulo());
-                        textAutor.setText(livros[cont-1].getAutor());
-                        textAno.setText(livros[cont-1].getAno());
-                        textNota.setText(livros[cont-1].getNota());
+                        textTitulo.setText(livros.get(cont-1).getTitulo());
+                        textAutor.setText(livros.get(cont-1).getAutor());
+                        textAno.setText(livros.get(cont-1).getAno());
+                        textNota.setText(livros.get(cont-1).getNota());
                     }
 
                 }

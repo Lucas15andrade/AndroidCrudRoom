@@ -7,6 +7,8 @@ import android.arch.persistence.room.Query;
 
 import com.andradecoder.androidcrud.modelo.Livro;
 
+import java.util.List;
+
 @Dao
 public interface LivroDAO {
 
@@ -17,5 +19,5 @@ public interface LivroDAO {
     int delete(Livro livro);
 
     @Query("SELECT * FROM LIVRO")
-    Livro[] listarTodos();
+    List<Livro> listarTodos();
 }
