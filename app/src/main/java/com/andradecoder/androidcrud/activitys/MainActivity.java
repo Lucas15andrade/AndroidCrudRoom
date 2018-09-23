@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.andradecoder.androidcrud.BuscarActivity;
 import com.andradecoder.androidcrud.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ListarActivity.class);
                 startActivityForResult(intent,2);
+            }
+        });
+
+        Button botaoBuscar = findViewById(R.id.botaoBuscar);
+        botaoBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BuscarActivity.class);
+                startActivityForResult(intent, 3);
             }
         });
     }
