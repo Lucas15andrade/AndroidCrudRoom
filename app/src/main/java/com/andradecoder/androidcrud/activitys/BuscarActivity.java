@@ -1,4 +1,4 @@
-package com.andradecoder.androidcrud;
+package com.andradecoder.androidcrud.activitys;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
+import com.andradecoder.androidcrud.R;
 import com.andradecoder.androidcrud.modelo.Livro;
 import com.andradecoder.androidcrud.util.AppDatabase;
 import com.andradecoder.androidcrud.util.LivroDAO;
@@ -25,13 +26,13 @@ public class BuscarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_buscar);
 
         final TextView textTitulo = findViewById(R.id.textTitulo);
-        TextView textAutor = findViewById(R.id.textAutor);
+        final TextView textAutor = findViewById(R.id.textAutor);
 
         db = AppDatabase.getDatabase(this);
         livrodao = db.livrodao();
-        ArrayList<Livro> livros = (ArrayList<Livro>) livrodao.listarTodos();
+        final ArrayList<Livro> livros = (ArrayList<Livro>) livrodao.listarTodos();
 
-        String[] livrosString = new String[livros.size()];
+        final String[] livrosString = new String[livros.size()];
 
         for (int x = 0; x < livros.size(); x++) {
             livrosString[x] = livros.get(x).getTitulo();
@@ -45,6 +46,13 @@ public class BuscarActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Implementar
+//                textTitulo.setText(livrosString[i]);
+//
+//                for (int y = 0; y < livrosString.length; y++) {
+//                    if(livros.get(y).getTitulo().equals(livrosString[i])){
+//                        textAutor.setText(livros.get(y).getAutor());
+//                    }
+//                }
             }
         });
     }

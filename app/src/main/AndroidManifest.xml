@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".activitys.CadastroActivity" />
         <activity android:name=".activitys.ListarActivity" />
-        <activity android:name=".BuscarActivity"></activity>
+        <activity android:name=".activitys.BuscarActivity"></activity>
     </application>
 
 </manifest>

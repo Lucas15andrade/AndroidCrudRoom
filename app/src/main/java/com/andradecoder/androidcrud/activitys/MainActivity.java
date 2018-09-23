@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.andradecoder.androidcrud.BuscarActivity;
 import com.andradecoder.androidcrud.R;
 
 public class MainActivity extends AppCompatActivity {
